@@ -42,23 +42,22 @@ cacheSolve <- function(x, ...) {
         # locally store inverse of the matrix cached through makeCacheMatrix
         local_invr <- x$getInverse()
         
-        # The varible returned by x$getInverse() defaults to a NULL value when 
+        # The variable returned by x$getInverse() defaults to a NULL value when 
         #  makeCacheMatrix() is used. Only when cacheSolve() is called does 
         #  x$getInverse() get a non-NULL value. So, if the matrix passed to 
         #  makeCacheMatrix() is changed, the value returned by x$getInverse()
-        #  reset to NULL. This section tests for non-NULL values; if a value 
-        #  exists it is returned. Otherwise the rest of the function is run 
-        #  and 
+        #  is reset to NULL. This section tests for non-NULL values; if a value 
+        #  exists it is returned. Otherwise the rest of the function is run.
         if (!is.null(local_invr) )
         {
-                message("getting cached data")
+                message("get cached data")
                 return(local_invr)
         }
         
         # get the currently stored matrix, calc the inverse, store that into 
         #  the variable 'invr' fo future use, and return the results
         matr <- x$get()
-        message("calc inverse")
+        message("calc inverse; store for future use")
         invr <- solve(matr, ...)
         x$setInverse(invr)
         return(invr)
